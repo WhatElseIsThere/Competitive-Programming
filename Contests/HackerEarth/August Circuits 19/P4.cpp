@@ -25,7 +25,7 @@ struct SegmentTree {
     }
 
     void add(int v, int tl, int tr, int l, int r, ll val) {
-        if (tl >= r || tr <= l)
+        if (max(tl, l) >= min(tr, r))
             return;
         if (tl >= l && tr <= r) {
             t[v] += val;
