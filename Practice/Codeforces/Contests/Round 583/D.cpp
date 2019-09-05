@@ -54,15 +54,12 @@ int main() {
         }
     }
 
-    int ans = INT_MAX;
-    for (int d = 1; d < (n + m - 2); d++) {
-        int cnt = 0;
-        for (int i = max(d - (m - 1), 0); i <= min(d, n - 1); i++) {
-            int j = d - i;
-            cnt += (b1[i][j] && b2[i][j]);
-        }
-        ans = min(ans, cnt);
-    }
+    vector<int> cnt(n + m - 1);
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < m; j++)
+            cnt[i + j] += (b1[i][j] && b2[i][j]);
+
+    int ans = *min_element(cnt.begin() + 1, cnt.end() - 1);
 
     cout << ans << endl;
 }
