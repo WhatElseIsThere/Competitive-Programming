@@ -138,7 +138,7 @@ int main() {
 
             auto ids = t.partition(l, r);
 
-            int lVal = -1, rVal = (r - l + 1) + k;
+            int lVal = -1, rVal = (r - l) + k;
             while (rVal - lVal > 1) {
                 int mVal = (lVal + rVal) / 2;
 
