@@ -26,22 +26,26 @@ int main() {
     cin >> s;
 
     vector<ll> dp(n);
-    set<pair<ll, int>> upd;
+    queue<int> q;
 
     for (int i = 0; i < min(k, n); i++) {
         if (s[i] == '1')
-            upd.insert({i + 1, i + k});
+            q.push(i - k);
     }
 
-    for (int i = 0; i < n; i++) {
-        dp[i] = (i ? dp[i - 1] : 0) + (i + 1);
-        if (i + k < n && s[i + k] == '1')
-            upd.insert({(i ? dp[i - 1] : 0) + (i + k + 1), i + 2 * k});
+    auto dpVal = [&] (int pos) {
+        return (pos < 0 ? 0 : dp[pos]);
+    };
 
-        while (!upd.empty() && (upd.begin()->second < i))
-            upd.erase(upd.begin());
-        if (!upd.empty())
-            dp[i] = min(dp[i], upd.begin()->first);
+    for (int i = 0; i < n; i++) {
+        dp[i] = dpVal(i - 1) + (i + 1);
+        if (i + k < n && s[i + k] == '1')
+            q.push(i);
+
+        if (!q.empty() && (q.front() + 2 * k < i))
+            q.pop();
+        if (!q.empty())
+            dp[i] = min(dp[i], dpVal(q.front() - 1) + (q.front() + k + 1));
     }
 
     cout << dp[n - 1] << endl;
