@@ -33,20 +33,20 @@ int main() {
             q.push(i - k);
     }
 
-    auto dpVal = [&] (int pos) {
+    auto f = [&] (int pos) {
         return (pos < 0 ? 0 : dp[pos]);
     };
 
     for (int i = 0; i < n; i++) {
-        dp[i] = dpVal(i - 1) + (i + 1);
+        dp[i] = f(i - 1) + (i + 1);
         if (i + k < n && s[i + k] == '1')
             q.push(i);
 
         if (!q.empty() && (q.front() + 2 * k < i))
             q.pop();
         if (!q.empty())
-            dp[i] = min(dp[i], dpVal(q.front() - 1) + (q.front() + k + 1));
+            dp[i] = min(f(i), f(q.front() - 1) + (q.front() + k + 1));
     }
 
-    cout << dp[n - 1] << endl;
+    cout << f(n - 1) << endl;
 }
