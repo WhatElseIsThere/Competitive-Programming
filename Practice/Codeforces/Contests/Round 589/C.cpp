@@ -18,10 +18,6 @@ using ld = long double;
 
 const int MOD = 1e9 + 7;
 
-int add(int a, int b) {
-    return (a + b) % MOD;
-}
-
 int mul(int a, int b) {
     return (a * 1LL * b) % MOD;
 }
