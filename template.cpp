@@ -2,6 +2,9 @@
 
 using namespace std;
 
+#define fi first
+#define se second
+
 using ll = long long;
 using ld = long double;
 
