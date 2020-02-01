@@ -47,22 +47,16 @@ int main() {
         }
     }
 
-    vector<int> row_vals(n);
+    vector<int> row_sum(n), col_sum(m);
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < m; j++) {
-            row_vals[i] += a[i][j];
+            row_sum[i] += a[i][j];
+            col_sum[j] += a[i][j];
         }
     }
 
-    vector<int> col_vals(m);
-    for (int j = 0; j < m; j++) {
-        for (int i = 0; i < n; i++) {
-            col_vals[j] += a[i][j];
-        }
-    }
-
-    auto r = calc(row_vals, k, m * p);
-    auto c = calc(col_vals, k, n * p);
+    auto r = calc(row_sum, k, m * p);
+    auto c = calc(col_sum, k, n * p);
 
     ll ans = LLONG_MIN;
     for (int i = 0; i <= k; i++) {
